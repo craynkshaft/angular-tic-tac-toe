@@ -16,8 +16,8 @@
 
     <script src="js/angular.js"></script>
     <script src="js/app.js"></script>
-
   </head>
+
   <body ng-controller="gameController">
     <header class="header">
       <div id="playerOne" ng-click="colorChange(1)">
@@ -29,7 +29,7 @@
       <div id="message">{{message}}</div>
     </header>
    <div id="gameboard">
-    <div class="box" ng-repeat="box in boxes track by $index" ng-click="boxClick($index)" ng-class="whichColor($index)"></div>
+    <div class="box" ng-repeat="box in boxes track by $index" ng-click="boxClick($index)" ng-class="whichColor($index)" ng-style="{'background-color': whichColor($index)}"></div>
     <!-- <div align="center">{{turn}} moves</div> -->
    </div>
    <footer>
