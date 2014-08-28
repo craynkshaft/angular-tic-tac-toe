@@ -15,28 +15,35 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/angular.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+
     <script src="js/app.js"></script>
   </head>
 
   <body ng-controller="gameController">
     <header class="header">
       <div id="playerOne" ng-click="colorChange(1)">
-        <input type="text" class="text" value="Player 1" ng-model="playerOne.name" onclick="this.value=''"> {{playerOne.score}}
+        <input type="text" class="text" value="Player 1" ng-model="players[0].name" onclick="this.value=''"> {{players[0].score}}
       </div>
       <div id="playerTwo" align="right" ng-click="colorChange(2)">
-        {{playerTwo.score}} <input type="text"  class="text" value="Player 2" ng-model="playerTwo.name" onclick="this.value=''"> 
+        {{players[1].score}} <input type="text" class="text" value="Player 2" ng-model="players[1].name" onclick="this.value=''"> 
       </div>
       <div id="message">{{message}}</div>
     </header>
    <div id="gameboard">
-    <div class="box" ng-repeat="box in boxes track by $index" ng-click="boxClick($index)" ng-class="whichColor($index)" ng-style="{'background-color': whichColor($index)}"></div>
+    <div class="box" ng-repeat="box in container.boxes track by $index" ng-click="boxClick($index, box)" ng-style="{'background-color': clickColor(box)}"></div>
+    <!--<div class="box" ng-repeat="box in boxes track by $index" ng-click="boxClick($index, box)" ng-style="{'background-color': players[box].color}"></div> -->
     <!-- <div align="center">{{turn}} moves</div> -->
    </div>
    <footer>
      <div id="sizeAdjustments">
-      <input type="button" id="three" value="3-in-a-row" ng-click="setSize(3)">
-      <input type="button" id="six" value="2 x 2" ng-click="setSize(6)">
-      <input type="button" id="nine" value="3 x 3" ng-click="setSize(9)">
+      <input type="button" id="three" value="3 x 3" ng-click="setSize(3)">
+      <input type="button" id="six" value="6 x 6" ng-click="setSize(6)">
+      <input type="button" id="nine" value="9 x 9" ng-click="setSize(9)">
       <input type="button" value="Reset" ng-click="startup()" id="reset">
     </div>
    </footer>
