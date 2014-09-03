@@ -26,18 +26,17 @@
 
   <body ng-controller="gameController">
     <header class="header">
-      <div id="playerOne" ng-click="colorChange(1)">
-        <input type="text" class="text" value="Player 1" ng-model="players[0].name" onclick="this.value=''"> {{players[0].score}}
+      <div id="playerOne" ng-click="colorChange(1)" ng-style="{'background-color': container.players[0].color}">
+        <input id="p1Input" type="text" class="text" value="Player 1" ng-model="container.players[0].name" onclick="this.value=''"> {{container.players[0].score}}
       </div>
-      <div id="playerTwo" align="right" ng-click="colorChange(2)">
-        {{players[1].score}} <input type="text" class="text" value="Player 2" ng-model="players[1].name" onclick="this.value=''"> 
+      <div id="playerTwo" align="right" ng-click="colorChange(2)" ng-style="{'background-color': container.players[1].color}">
+        {{container.players[1].score}} <input type="text" class="text" value="Player 2" ng-model="container.players[1].name" onclick="this.value=''"> 
       </div>
-      <div id="message">{{message}}</div>
+      <div id="message">{{container.message}}</div>
+      <div id="turnIndicator" ng-style= "{float: turnIndicator() }"></div>
     </header>
-   <div id="gameboard">
+   <div id="gameboard" ng-style="{'width': container.currentWidth}">
     <div class="box" ng-repeat="box in container.boxes track by $index" ng-click="boxClick($index, box)" ng-style="{'background-color': clickColor(box)}"></div>
-    <!--<div class="box" ng-repeat="box in boxes track by $index" ng-click="boxClick($index, box)" ng-style="{'background-color': players[box].color}"></div> -->
-    <!-- <div align="center">{{turn}} moves</div> -->
    </div>
    <footer>
      <div id="sizeAdjustments">
@@ -48,7 +47,7 @@
     </div>
    </footer>
 
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
